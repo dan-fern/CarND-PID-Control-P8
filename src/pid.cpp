@@ -17,7 +17,7 @@ PID::~PID( )
 void PID::Init( double Kp, double Ki, double Kd )
 {
     /**
-    * TODO: Initialize PID coefficients (and errors, if needed)
+    * TODO: Initialize PID coefficients
     */
     Kp_ = Kp;
     Ki_ = Ki;
@@ -69,8 +69,6 @@ void PID::UpdateError( double cte, bool twiddle )
 
         if( total_error_ < best_error_ )
         {
-            cout << "improvement!" << endl;
-
             best_error_ = total_error_;
 
             //if(step_ !=  n_settle_steps + n_eval_steps) {

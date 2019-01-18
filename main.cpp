@@ -39,8 +39,8 @@ int main( )
     PID pid_steering, pid_throttle;
 
     //P: 0.23236, I: 0.00421296, D: 3.486
-    pid_steering.Init( 0.262295, 0.0045614, 3.486 );
-    //pid_throttle.Init( 0.316731, 0.0000, 0.0226185 );
+    pid_steering.Init( 0.318568, 0.000, 4.19512 );
+    //pid_throttle.Init( 0.36137, 0.0000, 0.026718 );
     /**
     * TODO: Initialize the pid variable.
     */
@@ -72,13 +72,6 @@ int main( )
                     double angle = std::stod(j[1]["steering_angle"].get<string>());
                     double steer_value, throttle_value;
 
-                    /**
-                    * TODO: Calculate steering value here, remember the steering
-                    * value is [-1, 1].
-                    * NOTE: Feel free to play around with the throttle and speed
-                    *   Maybe use another PID controller to control the speed!
-                    */
-
                     bool twiddle = true;
 
                     // update error and calculate steer_value at each step
@@ -86,8 +79,7 @@ int main( )
                     steer_value = pid_steering.total_pid_value_;
 
                     // update error and calculate throttle_value at each step
-                    //pid_throttle.UpdateError( fabs( cte ), true );
-                    throttle_value = 0.250; //- pid_throttle.total_pid_value_;
+                    throttle_value = 0.5250; //- pid_throttle.total_pid_value_;
 
                     // DEBUG
                     if( !twiddle )
@@ -103,7 +95,6 @@ int main( )
                     json msgJson;
                     msgJson[ "steering_angle" ] = steer_value;
                     msgJson[ "throttle" ] = throttle_value;
-                    //msgJson["throttle"] = (1 - fabs(steer_value)) * 0.5 + 0.2;
 
                     auto msg = "42[\"steer\"," + msgJson.dump( ) + "]";
                     //std::cout << msg << std::endl;

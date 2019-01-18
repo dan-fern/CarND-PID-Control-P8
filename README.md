@@ -16,13 +16,18 @@ The integral (I) component counteracts any bias in the CTE which prevents the P-
 
 #### Describe how the final hyperparameters were chosen.
 Hyperparameters were tuned manually at first because the narrow track left little room for error.  Methods of parameter optimization (such as Twiddle) can be aided by a good initial guess.  In this case, if the guess was not good enough, it was very common for the car to leave the track and invalidate any optimization attempt.  Once I found parameters that were able to get the car around the track reliably, I then used a Twiddle optimizer to arrive at the final values of:
-* Kp = 0.262295,
-* Ki = 0.0045614, and
-* Kd = 3.486
+* Kp = 0.318568,
+* Ki = 0.000, and
+* Kd = 4.19512
+
+The Ki term arrives at zero because there is no systematic bias in the system.  That is to say that the steering commands are passed to the wheels noise free.
 
 I attempted to implement a PID controller for the throttle, to maximize the car's speed around the track but it was ineffective.  
 
-All in all, the solution was not perfect and oscillated substantially, but the car completes loops while staying on the track.
+See [`./res/pid_3.mp4`](./res/pid_3.mp4) for [a video of a full loop around the track](./res/pid_3.mp4).  
+
+All in all, the solution was not perfect and oscillated substantially, but the car completes loops while staying on the track.  I believe one area for improvement would be modeling the rate of steering angle change.  When a steering command is issued, it takes some amount of time for the wheels to actually turn.  Modeling and incorporating that time would improve the responsiveness of a PID controller.  
+
 
 ## Dependencies
 
